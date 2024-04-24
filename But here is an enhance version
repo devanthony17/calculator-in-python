@@ -1,1 +1,92 @@
+"But here is an enhance version:" 
 
+
+def get_operation_choice():
+    """
+    Prompts the user to choose an arithmetic operation.
+    Returns the user's choice as a string ('1', '2', '3', or '4').
+    """
+    print("Select operation:")
+    print("1. Addition")
+    print("2. Subtraction")
+    print("3. Multiplication")
+    print("4. Division")
+    choice = input("Enter choice (1/2/3/4): ")
+    return choice
+
+
+def get_operands():
+    """
+    Prompts the user to enter two numbers.
+    Returns the two numbers as floats.
+    """
+    num1 = float(input("Enter first number: "))
+    num2 = float(input("Enter second number: "))
+    return num1, num2
+
+
+def add(x, y):
+    """
+    Returns the sum of two numbers.
+    """
+    return x + y
+
+
+def subtract(x, y):
+    """
+    Returns the difference between two numbers.
+    """
+    return x - y
+
+
+def multiply(x, y):
+    """
+    Returns the product of two numbers.
+    """
+    return x * y
+
+
+def divide(x, y):
+    """
+    Returns the quotient of two numbers.
+    If the divisor is zero, returns an error message.
+    """
+    if y == 0:
+        return "Error! Division by zero is not allowed."
+    else:
+        return x / y
+
+
+def perform_operation(choice, num1, num2):
+    """
+    Performs the chosen arithmetic operation on the two numbers.
+    Returns the result of the operation.
+    """
+    operations = {
+        '1': add(num1, num2),
+        '2': subtract(num1, num2),
+        '3': multiply(num1, num2),
+        '4': divide(num1, num2)
+    }
+    result = operations.get(choice, "Invalid choice")
+    return result
+
+
+def main():
+    """
+    The main function that runs the calculator program.
+    """
+    while True:
+        choice = get_operation_choice()
+        if choice in ('1', '2', '3', '4'):
+            num1, num2 = get_operands()
+            result = perform_operation(choice, num1, num2)
+            print(f"{num1} {['', '+', '-', '*', '/'][int(choice)]} {num2} = {result}")
+            next_calculation = input("Do you want to continue calculation (yes/no)? ").lower()
+            if next_calculation == "no":
+                print("Exiting the calculator")
+                break
+        else:
+            print("Invalid input")
+if _name_ == "_main_":
+    main()
